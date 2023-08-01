@@ -1,0 +1,37 @@
+import requests  
+  
+def get_weather_data(api_key, city_id):  
+   api_url = "https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22"
+    params = {  
+        "id": city_id,  
+        "units": "metric",  
+        "appid": api_key  
+        }
+    
+    response = requests.get(api_url, params=params)  
+    data = response.json()  
+    return data  
+
+api_key = "YOUR_API_KEY_HERE"  
+city_id = "800"
+
+    }
+
+    data = get_weather_data(api_key, city_id)  
+    print(data)  
+
+
+    def create_weather_report(data):  
+    report = "Weather Report:\n"  
+    city = data["name"]  
+    report += f"City: {city}\n"  
+    temperature = data["main"]["temp"]  
+    report += f"Temperature: {temperature}°C\n"  
+    humidity = data["main"]["humidity"]  
+    report += f"Humidity: {humidity}%\n"  
+    wind_speed = data["wind"]["speed"]  
+    report += f"Wind Speed: {wind_speed} m/s\n"  
+    return report  
+  
+report = create_weather_report(data)  
+print(report)  
